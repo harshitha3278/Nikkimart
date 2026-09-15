@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>NikkiMart - Login</title>
-
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
     <style>
         body {
             margin: 0;

@@ -53,6 +53,16 @@
             text-decoration: none;
             border-radius: 7px;
         }
+
+        .button.secondary {
+            background-color: #ff9800;
+        }
+
+        .seller-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
     </style>
 </head>
 
@@ -78,9 +88,16 @@
         <strong><%= user.getRole() %></strong>
     </p>
 
-    <a href="#" class="button">Browse Products</a>
-
+    <a href="product?action=browse" class="button">Browse Products</a>
     <a href="index.jsp" class="button">Home</a>
+
+    <% if ("SELLER".equals(user.getRole())) { %>
+        <div class="seller-section">
+            <h3>Seller Tools</h3>
+            <a href="product?action=myProducts" class="button secondary">My Products</a>
+            <a href="product?action=addForm" class="button secondary">Add New Product</a>
+        </div>
+    <% } %>
 
 </div>
 
