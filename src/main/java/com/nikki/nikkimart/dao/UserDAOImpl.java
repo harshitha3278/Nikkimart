@@ -15,8 +15,8 @@ public class UserDAOImpl implements UserDAO {
     public void registerUser(User user) {
 
         String sql = "INSERT INTO users " +
-                     "(name, email, password_hash, role) " +
-                     "VALUES (?, ?, ?, ?)";
+                "(name, email, password_hash, role) " +
+                "VALUES (?, ?, ?, ?)";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Unable to register user.");
         }
     }
 
@@ -43,20 +43,22 @@ public class UserDAOImpl implements UserDAO {
 
             ps.setString(1, email);
 
-            ResultSet rs = ps.executeQuery();
+            try (ResultSet rs = ps.executeQuery()) {
 
-            if (rs.next()) {
-                return new User(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("password_hash"),
-                    rs.getString("role")
-                );
+                if (rs.next()) {
+
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("role")
+                    );
+                }
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Unable to find user.");
         }
 
         return null;
@@ -66,6 +68,7 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAll() {
 
         List<User> users = new ArrayList<>();
+
         String sql = "SELECT * FROM users ORDER BY id";
 
         try (Connection con = DBConnection.getConnection();
@@ -73,17 +76,18 @@ public class UserDAOImpl implements UserDAO {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
+
                 users.add(new User(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("password_hash"),
-                    rs.getString("role")
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("role")
                 ));
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Unable to load users.");
         }
 
         return users;

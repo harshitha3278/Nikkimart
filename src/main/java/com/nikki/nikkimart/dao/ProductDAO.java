@@ -1,6 +1,7 @@
 package com.nikki.nikkimart.dao;
 
 import com.nikki.nikkimart.model.Product;
+
 import java.util.List;
 
 public interface ProductDAO {
@@ -10,6 +11,8 @@ public interface ProductDAO {
     boolean updateProduct(Product product);
 
     boolean deleteProduct(int productId, int sellerId);
+
+    boolean deleteProductByAdmin(int productId);
 
     Product findById(int productId);
 

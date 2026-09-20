@@ -1,6 +1,7 @@
 target/
-*.class
-*.war
+.idea/
 .vscode/
-*.mv.db
-*.trace.db
+*.iml
+.classpath
+.project
+.settings/

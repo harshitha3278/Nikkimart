@@ -3,106 +3,389 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="UTF-8">
-    <title>NikkiMart - Register</title>
+    <title>Farm Mart - Create Account</title>
+
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f8f2;
+            background: linear-gradient(135deg, #eef7ee, #f8fbf7);
+            min-height: 100vh;
+            color: #263238;
         }
 
         .header {
-            background-color: #2e7d32;
+            background: #12355b;
             color: white;
+            padding: 22px 20px;
             text-align: center;
-            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
         }
 
-        .box {
-            width: 350px;
-            margin: 50px auto;
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .page {
+            min-height: calc(100vh - 105px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 450px;
             background: white;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 38px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+        }
+
+        .icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #e8f4eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
         }
 
         h2 {
             text-align: center;
-            color: #2e7d32;
+            margin: 0;
+            color: #12355b;
+            font-size: 27px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin: 8px 0 25px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
         }
 
         label {
             display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
         }
 
-        input {
+        input,
+        select {
             width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 12px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            background: white;
         }
 
-        button {
+        input:focus,
+        select:focus {
+            border-color: #12355b;
+            box-shadow: 0 0 0 3px rgba(18,53,91,0.10);
+        }
+
+        .register-btn {
             width: 100%;
-            margin-top: 25px;
-            padding: 12px;
-            background-color: #2e7d32;
-            color: white;
+            padding: 13px;
+            margin-top: 8px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            background: #12355b;
+            color: white;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        button:hover {
-            opacity: 0.85;
+        .register-btn:hover {
+            background: #0d2945;
         }
 
-        .link {
+        .login-section {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eeeeee;
+            color: #6b7280;
+            font-size: 14px;
         }
 
-        a {
-            color: #2e7d32;
+        .login-section a {
+            color: #16803c;
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 4px;
         }
+
+        .login-section a:hover {
+            text-decoration: underline;
+        }
+
+        .secure-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #8a8f98;
+        }
+
+        .error-message {
+            background: #fff1f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .success-message {
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media (max-width: 500px) {
+
+            .page {
+                padding: 25px 15px;
+            }
+
+            .register-card {
+                padding: 28px 22px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+        }
+
     </style>
+
 </head>
 
 <body>
 
 <div class="header">
-    <h1>🌱 NikkiMart</h1>
-    <p>Farm Fresh Products Marketplace</p>
+
+    <div class="logo">
+        🌾 Farm Mart
+    </div>
+
+    <p class="tagline">
+        Farm Fresh Products Marketplace
+    </p>
+
 </div>
 
-<div class="box">
 
-    <h2>Create Your Account</h2>
+<div class="page">
 
-    <form action="register" method="post">
+    <div class="register-card">
 
-        <label>Name</label>
-        <input type="text" name="name" required>
+        <div class="icon">
+            👤
+        </div>
 
-        <label>Email</label>
-        <input type="email" name="email" required>
+        <h2>Create Your Account</h2>
 
-        <label>Password</label>
-        <input type="password" name="password" required>
+        <p class="subtitle">
+            Join Farm Mart and start shopping or selling
+        </p>
 
-        <button type="submit">Register</button>
 
-    </form>
+        <% String error = request.getParameter("error"); %>
 
-    <div class="link">
-        Already have an account?
-        <a href="login.jsp">Login</a>
+        <% if ("missing".equals(error)) { %>
+
+            <div class="error-message">
+                Please fill in all required fields.
+            </div>
+
+        <% } else if ("password".equals(error)) { %>
+
+            <div class="error-message">
+                Passwords do not match.
+            </div>
+
+        <% } else if ("short".equals(error)) { %>
+
+            <div class="error-message">
+                Password must contain at least 6 characters.
+            </div>
+
+        <% } else if ("exists".equals(error)) { %>
+
+            <div class="error-message">
+                An account with this email already exists.
+            </div>
+
+        <% } else if ("registration".equals(error)) { %>
+
+            <div class="error-message">
+                Registration failed. Please try again.
+            </div>
+
+        <% } %>
+
+
+        <form action="<%= request.getContextPath() %>/register" method="post">
+
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Re-enter your password"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="role">
+                    Account Type
+                </label>
+
+                <select id="role" name="role" required>
+
+                    <option value="">
+                        Select account type
+                    </option>
+
+                    <option value="BUYER">
+                        Buyer
+                    </option>
+
+                    <option value="SELLER">
+                        Seller
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="register-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <div class="login-section">
+
+            Already have an account?
+
+            <a href="<%= request.getContextPath() %>/login.jsp">
+                Login
+            </a>
+
+        </div>
+
+
+        <div class="secure-text">
+            🔒 Your account information is securely handled.
+        </div>
+
     </div>
 
 </div>

@@ -12,7 +12,17 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public boolean register(String name, String email, String password) {
+    public boolean register(String name,
+                            String email,
+                            String password) {
+
+        return register(name, email, password, "BUYER");
+    }
+
+    public boolean register(String name,
+                            String email,
+                            String password,
+                            String role) {
 
         if (name == null || name.isBlank()) {
             return false;
@@ -26,18 +36,27 @@ public class UserService {
             return false;
         }
 
+        if (!"BUYER".equals(role) &&
+                !"SELLER".equals(role)) {
+
+            return false;
+        }
+
+        email = email.trim().toLowerCase();
+
         if (userDAO.findByEmail(email) != null) {
             return false;
         }
 
-        String hashedPassword = PasswordUtil.hashPassword(password);
+        String hashedPassword =
+                PasswordUtil.hashPassword(password);
 
         User user = new User(
                 0,
-                name,
+                name.trim(),
                 email,
                 hashedPassword,
-                "BUYER"
+                role
         );
 
         userDAO.registerUser(user);
@@ -50,11 +69,13 @@ public class UserService {
         User user = userDAO.findByEmail(email);
 
         if (user != null &&
-            PasswordUtil.checkPassword(password, user.getPasswordHash())) {
+                PasswordUtil.checkPassword(
+                        password,
+                        user.getPasswordHash())) {
 
             return user;
         }
 
         return null;
-    }       
+    }
 }

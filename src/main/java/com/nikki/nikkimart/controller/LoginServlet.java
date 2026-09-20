@@ -31,19 +31,107 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        User user = userService.login(email, password);
+        // Validate input
+        if (email == null || email.trim().isEmpty()
+                || password == null || password.isEmpty()) {
+
+            response.sendRedirect(
+                    request.getContextPath()
+                            + "/login.jsp?error=1"
+            );
+            return;
+        }
+
+        // Authenticate user
+        User user = userService.login(
+                email.trim(),
+                password
+        );
 
         if (user != null) {
 
-            HttpSession session = request.getSession();
+            // Invalidate old session
+            HttpSession oldSession =
+                    request.getSession(false);
 
-            session.setAttribute("user", user);
+            if (oldSession != null) {
+                oldSession.invalidate();
+            }
 
-            response.sendRedirect("dashboard.jsp");
+            // Create fresh session
+            HttpSession session =
+                    request.getSession(true);
+
+            // Store logged-in user
+            session.setAttribute(
+                    "user",
+                    user
+            );
+
+            // 30-minute session timeout
+            session.setMaxInactiveInterval(
+                    30 * 60
+            );
+
+            // Get user role
+            String role = user.getRole();
+
+            // =========================
+            // SELLER
+            // =========================
+
+            if ("SELLER".equalsIgnoreCase(role)) {
+
+                response.sendRedirect(
+                        request.getContextPath()
+                                + "/seller-dashboard.jsp"
+                );
+
+            }
+
+            // =========================
+            // ADMIN
+            // =========================
+
+            else if ("ADMIN".equalsIgnoreCase(role)) {
+
+                response.sendRedirect(
+                        request.getContextPath()
+                                + "/admin"
+                );
+
+            }
+
+            // =========================
+            // BUYER
+            // =========================
+
+            else {
+
+                response.sendRedirect(
+                        request.getContextPath()
+                                + "/product?action=browse"
+                );
+            }
 
         } else {
 
-            response.sendRedirect("login.jsp?error=1");
+            // Login failed
+            response.sendRedirect(
+                    request.getContextPath()
+                            + "/login.jsp?error=1"
+            );
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws IOException {
+
+        response.sendRedirect(
+                request.getContextPath()
+                        + "/login.jsp"
+        );
     }
 }

@@ -1,4 +1,3 @@
-
 package com.nikki.nikkimart.model;
 
 public class User {
@@ -14,6 +13,7 @@ public class User {
 
     public User(int id, String name, String email,
                 String passwordHash, String role) {
+
         this.id = id;
         this.name = name;
         this.email = email;
